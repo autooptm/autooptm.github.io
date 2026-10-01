@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AutoOptm · Make your PyTorch and Python code run faster</title>
+<meta name="description" content="AutoOptm optimizes PyTorch training, inference and Python data code. Point it at a repo or upload a zip; get back a patch, verified end to end in your own program. 56 open-source projects, median 2.48x.">
+<link rel="canonical" href="https://autooptm.com/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="AutoOptm · Make your code run faster">
+<meta property="og:description" content="Point it at a repo or upload a zip. Get back a patch, verified end to end. 56 open-source projects, median 2.48x.">
+<meta property="og:url" content="https://autooptm.github.io/">
+<meta property="og:image" content="https://autooptm.github.io/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="stylesheet" href="style.css">
+<script>
+
+(function () {
+  var l = null, t = null;
+  try { l = localStorage.getItem('ao.lang'); t = localStorage.getItem('ao.theme'); } catch (e) {}
+  if (l !== 'zh' && l !== 'en') l = 'en';
+  document.documentElement.lang = l;
+  if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
+})();
+</script>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="logo" href="https://autooptm.com/"><svg class="mark" viewBox="-8 -8 288 156" fill="none" aria-hidden="true"><defs><linearGradient id="aoBolt" x1="0" y1="0" x2="1" y2="0.3"><stop offset="0%" stop-color="#38BDF8"/><stop offset="100%" stop-color="#6366F1"/></linearGradient></defs><path d="M172 28 L172 8 Q172 0 158 0 L22 0 Q0 0 0 22 L0 118 Q0 140 22 140 L158 140 Q172 140 172 132 L172 112" stroke="currentColor" stroke-width="13" stroke-linecap="round"/><path d="M28 50 L48 70 L28 90" stroke="currentColor" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/><line x1="58" y1="90" x2="78" y2="90" stroke="currentColor" stroke-width="10" stroke-linecap="round"/><path d="M75 43 L145 89 L145 55 L205 70 L126 13 L126 48 Z" fill="url(#aoBolt)"/><line x1="218" y1="46" x2="252" y2="46" stroke="#38BDF8" stroke-width="8" stroke-linecap="round" opacity=".55"/><line x1="226" y1="70" x2="270" y2="70" stroke="#6366F1" stroke-width="8" stroke-linecap="round"/><line x1="218" y1="94" x2="246" y2="94" stroke="#8B5CF6" stroke-width="8" stroke-linecap="round" opacity=".35"/></svg>AutoOptm</a>
+    <a class="gh-badge" href="https://github.com/autooptm" title="github.com/autooptm"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg><span class="zh">GitHub 版</span><span class="en">on GitHub</span></a>
+    <nav class="nav-links">
+      <a href="#how"><span class="zh">产品</span><span class="en">Product</span></a>
+      <a href="https://autooptm.com/results" data-zh-href="https://autooptm.com/zh/results"><span class="zh">实测</span><span class="en">Results</span></a>
+      <a href="https://autooptm.com/pricing" data-zh-href="https://autooptm.com/zh/pricing"><span class="zh">定价</span><span class="en">Pricing</span></a>
+      <a href="https://autooptm.com/cli" data-zh-href="https://autooptm.com/zh/cli"><span class="zh">文档</span><span class="en">Docs</span></a>
+    </nav>
+    <div class="nav-right">
+      <a class="btn quiet sm" href="https://autooptm.com/login?return_to=%2Fapp"><span class="zh">登录</span><span class="en">Sign in</span></a>
+      <button class="ghost" id="langBtn" type="button">EN</button>
+      <button class="ghost" id="themeBtn" type="button" aria-label="Toggle theme">◐</button>
+      <a class="btn sm nav-cta" href="https://autooptm.com/app"><span class="zh">开始</span><span class="en">Start</span><span class="arr">→</span></a>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="hero">
+  <div class="wrap hero-mid">
+    <p class="eyebrow"><span class="zh">PyTorch · Python · 自动性能优化</span><span class="en">PyTorch · Python · automated performance optimization</span></p>
+    <h1><span class="zh">让你的代码<br>更快一点</span><span class="en">Make your code<br>run faster</span></h1>
+    <p class="sub"><span class="zh">交给我们一个仓库或代码 zip 包，还你一个补丁。</span><span class="en">Point it at a repo or upload a zip. Get back a patch.</span></p>
+    <form class="launch" id="launch" autocomplete="off" action="https://autooptm.com/app" method="get">
+      <input type="url" name="repo" id="heroRepo" spellcheck="false" placeholder="https://github.com/you/your-repo" aria-label="Repository URL">
+      <button class="btn primary" type="submit"><span class="zh">开始</span><span class="en">Start</span><span class="arr">→</span></button>
+    </form>
+    <p class="micro"><span class="zh">首次试跑免费，先看实测加速比，满意再付费解锁补丁 · 私有代码？</span><span class="en">Your first run is free. See the measured speedup on your code; pay only to unlock the patch · Private code?</span>
+      <a href="https://autooptm.com/app"><span class="zh">上传 zip 包</span><span class="en">Upload a zip</span></a></p>
+    <div class="stats">
+      <div><b>56</b><small><span class="zh">个开源项目实测</span><span class="en">open-source projects measured</span></small></div>
+      <div><b>2.48×</b><small><span class="zh">端到端加速中位数</span><span class="en">median end-to-end speedup</span></small></div>
+      <div><b>23.41×</b><small><span class="zh">最高</span><span class="en">best so far</span></small></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="how">
+  <div class="wrap">
+    <p class="kicker"><span class="zh">怎么用</span><span class="en">How it works</span></p>
+    <h2><span class="zh">四步，从代码到补丁</span><span class="en">Four steps from your code to a patch</span></h2>
+    <ol class="steps">
+      <li><b>01</b><p><span class="zh">把代码交给我们：Git 仓库或 zip 包，加上你平时运行的那条命令，训练、推理或数据处理都可以。</span><span class="en">You give us your code — a Git repository or a zip — and the command you already run: training, inference or data processing.</span></p></li>
+      <li><b>02</b><p><span class="zh">我们在真实的 GPU 或 CPU 上运行它，先测原版程序，再做优化。</span><span class="en">We run it on a real GPU or CPU, measure the stock program, and optimize it.</span></p></li>
+      <li><b>03</b><p><span class="zh">加速在你自己的程序里<strong>端到端</strong>确认，输出逐项和原版比对。</span><span class="en">The speedup is confirmed <strong>end to end, in your own program</strong>, and the output is checked against the stock one.</span></p></li>
+      <li><b>04</b><p><span class="zh">你拿到一个可以直接 <code>git apply</code> 的补丁。没变快，不收费。</span><span class="en">You get a patch you can <code>git apply</code>. No speedup, no charge.</span></p></li>
+    </ol>
+  </div>
+</section>
+
+<section class="sec alt" id="results">
+  <div class="wrap">
+    <p class="kicker"><span class="zh">公开项目实测 · 端到端 · 输出已校验</span><span class="en">Measured on public projects · end to end · output verified</span></p>
+    <h2><span class="zh">每个结果都是一个可以复现的 fork</span><span class="en">Every result is a fork you can reproduce</span></h2>
+    <div class="cards">
+      <a class="card" href="https://github.com/autooptm/SwinIR-ao">
+        <span class="x">13.15×</span>
+        <h3>SwinIR</h3>
+        <span class="what"><span class="zh">图像超分辨率</span><span class="en">image super-resolution</span></span>
+        <span class="meta">RTX 4090 · autooptm/SwinIR-ao</span>
+      </a>
+      <a class="card" href="https://github.com/autooptm/CLIP-ao">
+        <span class="x">8.56×</span>
+        <h3>CLIP</h3>
+        <span class="what"><span class="zh">图文嵌入</span><span class="en">image–text embeddings</span></span>
+        <span class="meta">RTX 4090 · autooptm/CLIP-ao</span>
+      </a>
+      <a class="card" href="https://github.com/autooptm/dinov2-ao">
+        <span class="x">5.22×</span>
+        <h3>DINOv2</h3>
+        <span class="what"><span class="zh">自监督视觉特征</span><span class="en">self-supervised vision features</span></span>
+        <span class="meta">RTX 4090 D · autooptm/dinov2-ao</span>
+      </a>
+      <a class="card" href="https://github.com/autooptm/sapiens-ao">
+        <span class="x">3.75×</span>
+        <h3>Sapiens</h3>
+        <span class="what"><span class="zh">人体姿态估计</span><span class="en">human pose estimation</span></span>
+        <span class="meta">A10 · autooptm/sapiens-ao</span>
+      </a>
+      <a class="card" href="https://github.com/autooptm/gaussian-splatting-ao">
+        <span class="x">3.42×</span>
+        <h3>3D Gaussian Splatting</h3>
+        <span class="what"><span class="zh">三维重建（训练）</span><span class="en">3D reconstruction (training)</span></span>
+        <span class="meta">RTX 5090 · autooptm/gaussian-splatting-ao</span>
+      </a>
+      <a class="card" href="https://github.com/autooptm/Real-ESRGAN-ao">
+        <span class="x">3.35×</span>
+        <h3>Real-ESRGAN</h3>
+        <span class="what"><span class="zh">图像与视频放大</span><span class="en">image and video upscaling</span></span>
+        <span class="meta">NVIDIA GPU · autooptm/Real-ESRGAN-ao</span>
+      </a>
+      <a class="card" href="https://github.com/autooptm/yolov12-ao">
+        <span class="x">2.23×</span>
+        <h3>YOLOv12</h3>
+        <span class="what"><span class="zh">目标检测</span><span class="en">object detection</span></span>
+        <span class="meta">RTX 4090 · autooptm/yolov12-ao</span>
+      </a>
+      <a class="card" href="https://github.com/autooptm/sam2-ao">
+        <span class="x">1.82×</span>
+        <h3>SAM 2</h3>
+        <span class="what"><span class="zh">视频目标分割</span><span class="en">video object segmentation</span></span>
+        <span class="meta">RTX 4090 · autooptm/sam2-ao</span>
+      </a>
+    </div>
+    <p class="more"><a href="https://autooptm.com/results" data-zh-href="https://autooptm.com/zh/results"><span class="zh">查看全部 56 个项目</span><span class="en">See all 56 projects</span> →</a>
+      · <a href="https://github.com/autooptm"><span class="zh">GitHub 上的全部 fork</span><span class="en">All forks on GitHub</span> →</a></p>
+  </div>
+</section>
+
+<section class="sec" id="tour">
+  <div class="wrap">
+    <p class="kicker"><span class="zh">产品一览</span><span class="en">Product tour</span></p>
+    <h2><span class="zh">从提交到补丁</span><span class="en">From submit to patch</span></h2>
+    <div class="tour">
+      <figure><img src="img/01-submit.png" alt="Submit page" loading="lazy"><figcaption><b>1</b><span class="zh">提交：Git 地址或代码 zip，加上你平时运行的命令。</span><span class="en">Submit: a Git URL or a zip of your code, plus the command you already run.</span></figcaption></figure>
+      <figure><img class="focus-mid" src="img/02-estimate.png" alt="Free estimate" loading="lazy"><figcaption><b>2</b><span class="zh">免费估算：静态扫描，不运行代码；继续或停止，停止不收费。</span><span class="en">Free estimate: a static scan, no code executed. Continue or stop at no charge.</span></figcaption></figure>
+      <figure><img src="img/03-running.png" alt="Optimizing" loading="lazy"><figcaption><b>3</b><span class="zh">优化：在真实 GPU 上运行，每个改动都实测，过了校验才保留。</span><span class="en">Optimize: your program runs on a real GPU; every change is measured and kept only if it passes.</span></figcaption></figure>
+      <figure><img src="img/04-result.png" alt="Result" loading="lazy"><figcaption><b>4</b><span class="zh">结果：端到端确认的加速、输出校验，和一个可直接应用的补丁。</span><span class="en">Result: the speedup confirmed end to end, the output checked, and a patch to apply.</span></figcaption></figure>
+      <figure class="wide"><img src="img/05-results.png" alt="Public results" loading="lazy"><figcaption><b>5</b><span class="zh">公开结果：每个项目都链接到 GitHub 上可复现的 fork。</span><span class="en">Public results, each linked to a fork you can reproduce on GitHub.</span></figcaption></figure>
+    </div>
+    <p class="note"><span class="zh">截图使用演示数据，不含任何真实账户。</span><span class="en">Screenshots use demo data; no real account is shown.</span></p>
+  </div>
+</section>
+
+<section class="sec end">
+  <div class="wrap">
+    <h2><span class="zh">先看看你的代码能快多少</span><span class="en">See how much faster your code can run</span></h2>
+    <p class="lead"><span class="zh">估算免费，几秒出结果。看过预估加速比，再决定要不要继续。</span><span class="en">The estimate is free and ready in seconds. See the projected speedup first, then decide whether to continue.</span></p>
+    <div class="cta">
+      <a class="btn primary lg" href="https://autooptm.com/app"><span class="zh">提交代码</span><span class="en">Submit your code</span><span class="arr">→</span></a>
+      <a class="btn quiet lg" href="https://autooptm.com/login?return_to=%2Fapp"><span class="zh">登录</span><span class="en">Sign in</span></a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-in">
+    <p><span class="zh">这是 AutoOptm 在 GitHub 上的介绍页。提交、登录和账单都在</span><span class="en">This is AutoOptm's page on GitHub. Submitting, signing in and billing all happen on</span> <a href="https://autooptm.com/">autooptm.com</a>.</p>
+    <p class="links">
+      <a href="https://autooptm.com/">autooptm.com</a>
+      <a href="https://autooptm.com/privacy" data-zh-href="https://autooptm.com/zh/privacy"><span class="zh">隐私</span><span class="en">Privacy</span></a>
+      <a href="https://autooptm.com/terms" data-zh-href="https://autooptm.com/zh/terms"><span class="zh">条款</span><span class="en">Terms</span></a>
+      <a href="https://github.com/autooptm">GitHub</a>
+      <a href="mailto:hi@autooptm.com">hi@autooptm.com</a>
+    </p>
+    <p class="copy">© 2026 AutoOptm</p>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>
